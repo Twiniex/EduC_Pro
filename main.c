@@ -3,12 +3,10 @@
 #include "PlcData.h"
 #include <stdio.h>
 #include <conio.h>
+#include "HwControl.h"
 
 extern void InitServerThread(void);
 void (*dummy)(void) = InitServerThread;
-
-// 시작
-#include "HwControl.h"
 
 
 int main() {

@@ -6,7 +6,9 @@
         "label": "Build LIB",
         "type": "shell",
         //"command": "gcc -c modbus.c -o bin/modbus.o && gcc -c PlcData.c -o bin/PlcData.o && ar rcs bin/libplc.a bin/modbus.o bin/PlcData.o",
-        "command": "gcc -c modbus.c -o bin/modbus.o && gcc -c PlcData.c -o bin/PlcData.o && gcc -c HwControl.c -o bin/HwControl.o && ar rcs bin/libplc.a bin/modbus.o bin/PlcData.o",
+        //"command": "gcc -c modbus.c -o bin/modbus.o && gcc -c PlcData.c -o bin/PlcData.o && gcc -c HwControl.c -o bin/HwControl.o && ar rcs bin/libplc.a bin/modbus.o bin/PlcData.o",
+        "command": "gcc -c modbus.c -o bin/modbus.o && gcc -c PlcData.c -o bin/PlcData.o && ar rcs bin/libplc.a bin/modbus.o bin/PlcData.o",
+
         "options": {
           "cwd": "${workspaceFolder}",
           "shell": {
@@ -23,7 +25,7 @@
       {
         "label": "Build EXE",
         "type": "shell",
-        "command": "gcc -std=c2x main.c -I. -Lbin -lplc -o bin/main.exe -mconsole -lws2_32",
+        "command": "gcc -std=c2x main.c HwControl.c -I. -Lbin -lplc -o bin/main.exe -mconsole -lws2_32",
         "dependsOn": ["Build LIB"],
         "options": {
           "cwd": "${workspaceFolder}",

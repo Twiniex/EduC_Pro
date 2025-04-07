@@ -56,9 +56,13 @@ int Modbus_StartServer(int port) {
     c = sizeof(struct sockaddr_in);
     while ((client_sock = accept(server_sock, (struct sockaddr*)&client, &c)) != INVALID_SOCKET) {
         printf("클라이언트 접속됨\n");
-        recv_size = recv(client_sock, recv_buf, sizeof(recv_buf), 0);
 
-        if (recv_size > 0) {
+        while(1)
+        {
+            recv_size = recv(client_sock, recv_buf, sizeof(recv_buf), 0);
+
+            if (recv_size <= 0) break;
+            
             // 기본 헤더 복사
             memcpy(send_buf, recv_buf, 6);
             send_buf[6] = recv_buf[6];
@@ -87,6 +91,7 @@ int Modbus_StartServer(int port) {
                     for (int i = 0; i < 100; i++) {
                         toPlc[i] = (recv_buf[17 + (i * 2)] << 8) | recv_buf[18 + (i * 2)];
                     }
+                    
                     break;
             }
         }

@@ -30,6 +30,10 @@ int main() {
             {
                 doPutOne(1, false);
             }
+            if(ch == '5')
+            {
+                printf("input = 0x%X, output = 0x%X\n", toPlc[90], fromPlc[90]);
+            }
         }
     }
     
